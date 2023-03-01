@@ -159,6 +159,15 @@ public class DeleteHelper {
         boolean[] checkedItems = {false, false, false, false};
         ArrayList<Integer> mUserReason = new ArrayList<>();
 
+        //Link to the deletion policy
+        String[] deletionPolicy = 
+        { 
+        "https://commons.wikimedia.org/wiki/Commons:Fair_use", 
+        "https://commons.wikimedia.org/wiki/Commons:Fair_use", 
+        "https://commons.wikimedia.org/wiki/Commons:Fair_use", 
+        "https://commons.wikimedia.org/wiki/Commons:Freedom_of_panorama" 
+        };
+
         String[] reasonList = {"Reason 1", "Reason 2", "Reason 3"};
         // Messages posted on-wiki should not be in the app user's locale, but rather in Commons' lingua franca English.
         String[] reasonListEnglish = {"Eng1", "Eng2", "Eng3"};
@@ -171,12 +180,12 @@ public class DeleteHelper {
             reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_blurry);
             reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_nonsense);
         } else if (problem == ReviewController.DeleteReason.COPYRIGHT_VIOLATION) {
-            reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
-            reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
-            reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
-            reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_press_photo);
-            reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
-            reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo) + " " + deletionPolicy[0];
+            reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo) + " " + deletionPolicy[1];
+            reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo) + " " + deletionPolicy[2];
+            reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_press_photo) + " " + deletionPolicy[0];
+            reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_internet_photo) + " " + deletionPolicy[1];
+            reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo) + " " + deletionPolicy[2];
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, listener = (dialogInterface, position, isChecked) -> {
